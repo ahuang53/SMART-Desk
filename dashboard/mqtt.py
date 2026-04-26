@@ -22,7 +22,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "dashboard.settings")
 django.setup()
 
 # --- Configuration ---
-MQTT_BROKER = "test.mosquitto.org"
+MQTT_BROKER = "129.161.190.151"
 MQTT_PORT = 1883
 
 from web.models import DistanceReading, WeightReading, RFIDReading
@@ -66,7 +66,7 @@ def main():
 
     print(f" Connecting to {MQTT_BROKER}...")
     try:
-        client.connect(MQTT_BROKER, MQTT_PORT, 60)
+        client.connect(MQTT_BROKER, MQTT_PORT, 180)
     except Exception as e:
         print(f"Could not connect to broker: {e}")
         sys.exit(1)

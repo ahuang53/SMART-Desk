@@ -5,7 +5,7 @@
 
 // WiFi
 const char* ssid = "rpi_wpa2";
-const char* mqttServer = "test.mosquitto.org";
+const char* mqttServer = "129.161.190.151";
 const uint16_t mqttPort = 1883;
 
 WiFiClient espClient;

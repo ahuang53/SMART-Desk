@@ -24,7 +24,7 @@ void ranger_task(void *parameter){
     if(xQueueSend(mqtt_queue, &msg, 10) != pdTRUE){ //10s timeout
       Serial.println("Failed to add ranger value to queue");
     }
-    vTaskDelay(300 / portTICK_PERIOD_MS);
+    vTaskDelay(400 / portTICK_PERIOD_MS);
   }
 }
 
