@@ -45,7 +45,7 @@ function updatePostureStatus(mode, leftWeight, rightWeight, distance) {
             break;
 
         case "Gaming":
-            if (distance <12) {
+            if (distance < 12) {
                 isGood = false;
                 message = "Too close to the screen: fix your posture";
             }
