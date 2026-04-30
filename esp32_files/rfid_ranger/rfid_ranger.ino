@@ -15,6 +15,7 @@ TaskHandle_t ranger_handle;
 TaskHandle_t rfid_handle; 
 TaskHandle_t mqtt_pub_handle;
 
+//Read ranger and send to mqtt topic
 void ranger_task(void *parameter){
   while(1){
     ranger_poll();
@@ -28,6 +29,7 @@ void ranger_task(void *parameter){
   }
 }
 
+//Read rfid tags and send to mqtt topic
 void rfid_task(void *parameter){
   byte scannedUID[10];
   byte scannedSize = 0;
@@ -37,7 +39,7 @@ void rfid_task(void *parameter){
 
     if (detected) {
       activity = getActivity(scannedUID, scannedSize);
-      if(currentActivity != activity){
+      if(currentActivity != activity){ //If new tag is found
         copyUID(scannedUID, scannedSize);
         currentActivity = activity;
         showActivityColor(currentActivity);
@@ -55,6 +57,7 @@ void rfid_task(void *parameter){
   }
 }
 
+//Dequeue and publish to mqtt
 void mqtt_pub_task(void *parameter){
   MqttMessage msg;
   while(1){
@@ -71,7 +74,6 @@ void setup(){
   LED_setup();
   ranger_setup();
   wifi_setup();
-  // mqtt_sub(mqtt_topic);
 
   vTaskDelay(2000 / portTICK_PERIOD_MS);
 

@@ -9,6 +9,7 @@ import json
 def dashboard_view(request):
     return render(request, "web/home.html")
 
+# Return request data 
 def sse_data(request):
     def event_stream():
         last_rfid_id = None
@@ -20,6 +21,7 @@ def sse_data(request):
             weight_qs = WeightReading.objects.all()
             rfid_qs = RFIDReading.objects.all()
 
+            # Grab last 20 entries of db
             if last_distance_id:
                 distance_qs = distance_qs.filter(id__gt=last_distance_id)
             else:
@@ -45,7 +47,7 @@ def sse_data(request):
                 last_weight_id = weights[-1].id
             if rfids:
                 last_rfid_id = rfids[-1].id
-            # Send separately
+            # Store each data type separately
             data = {
                 "distances": [
                     {

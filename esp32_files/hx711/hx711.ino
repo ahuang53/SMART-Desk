@@ -8,6 +8,7 @@ const int sck1 = 16;
 const int dout2 = 19;
 const int sck2 = 18;
 
+// Calibration factors
 const float calib1 = -337.08;
 const float calib2 = -391.96889;
 
@@ -25,7 +26,9 @@ void setup() {
   scale2.begin(dout2, sck2);
 
   scale2.set_scale(calib2); 
-  scale2.tare();     
+  scale2.tare();
+  
+  //Tare both scales again for accuracy 
   delay(2000);
   scale.tare();      
   scale2.tare();      
@@ -38,6 +41,7 @@ void loop() {
   float reading1 = 0.0;
   float reading2 = 0.0;
   
+  //Grab scale 1 reading
   if (scale.is_ready()) {
     reading1 = scale.get_units(5);
     Serial.printf("Read1:");
@@ -45,6 +49,8 @@ void loop() {
   } else {
     Serial.println("HX711 not found.");
   }
+
+  //Grab scale 1 reading
   if (scale2.is_ready()) {
     reading2 = scale2.get_units(5);
     Serial.printf("Read2:");
@@ -52,6 +58,7 @@ void loop() {
   } else {
     Serial.println("HX711 not found.");
   }
+  //Send to mqtt topic
   char payload[100];
   snprintf(payload, sizeof(payload),
            "{\"left_weight\":%.2f,\"right_weight\":%.2f}",

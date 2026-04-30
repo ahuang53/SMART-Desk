@@ -15,21 +15,24 @@ String currentActivity = "";
 unsigned long lastAnimUpdate = 0;
 int gamingHue = 0;
 
+//Initializes all LEDS
 void LED_setup() {
   SPI.begin(18, 19, 23, 5);
   mfrc522.PCD_Init();
   strip.begin();
-  strip.setBrightness(20);
+  strip.setBrightness(60);
   strip.clear();
   strip.show();
 }
 
+//Set non-gaming color LEDS
 void setColor(uint8_t r, uint8_t g, uint8_t b) {
   for (int i = 0; i < NUM_PIXELS; i++)
     strip.setPixelColor(i, strip.Color(r, g, b));
   strip.show();
 }
 
+//Set gaming color LEDS
 void updateGaming() {
   if (millis() - lastAnimUpdate < 20) return;
   lastAnimUpdate = millis();

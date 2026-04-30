@@ -1,3 +1,4 @@
+// Change the header color and mode text
 function changeNavMode(newClass) {
     const nav = document.getElementById('main-nav');
     const modeBadge = document.getElementById('modeText');
@@ -23,6 +24,7 @@ function changeNavMode(newClass) {
     
 }
 
+// Change alerts based on threshold
 function updatePostureStatus(mode, leftWeight, rightWeight, distance) {
     const alertBox = document.getElementById("statusAlert");
 
@@ -30,7 +32,6 @@ function updatePostureStatus(mode, leftWeight, rightWeight, distance) {
     let message = "Posture is optimal";
 
     const avgWeight = (leftWeight + rightWeight) / 2;
-    // const weightDiff = Math.abs(leftWeight - rightWeight);
 
     switch (mode) {
         case "Eating":
